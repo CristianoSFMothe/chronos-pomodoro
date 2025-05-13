@@ -1,4 +1,4 @@
-import './Heading.css';
+import './styles.css';
 
 type HeadingProps = {
   children: React.ReactNode;
