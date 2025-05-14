@@ -1,21 +1,24 @@
 import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from 'lucide-react';
-import './styles.css';
+import styles from './styles.module.css';
 
-export const Menu = () => {
+export function Menu() {
   return (
-    <nav className='menu'>
-      <a className='menuLink house' href='#'>
+    <nav className={styles.menu}>
+      <a className={styles.menuLink} href='#'>
         <HouseIcon />
       </a>
-      <a className='menuLink history' href='#'>
+
+      <a className={styles.menuLink} href='#'>
         <HistoryIcon />
       </a>
-      <a className='menuLink settings' href='#'>
+
+      <a className={styles.menuLink} href='#'>
         <SettingsIcon />
       </a>
-      <a className='menuLink theme' href='#'>
+
+      <a className={styles.menuLink} href='#'>
         <SunIcon />
       </a>
     </nav>
   );
-};
+}
