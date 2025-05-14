@@ -4,6 +4,7 @@ import './styles/global.css';
 import { Menu } from './components/Menu';
 import { CountDown } from './components/CountDown';
 import { Container } from './components/Container';
+import { DefaultIndex } from './components/Input';
 
 export function App() {
   return (
@@ -23,8 +24,12 @@ export function App() {
       <Container>
         <form className='form' action=''>
           <div className='formRow'>
-            <label htmlFor='meuInput'>task</label>
-            <input id='meuInput' type='text' />
+            <DefaultIndex
+              id='formInput'
+              type='text'
+              labelText='Tarefa'
+              placeholder='Digite uma tarefa'
+            />
           </div>
 
           <div className='formRow'>
