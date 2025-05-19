@@ -1,6 +1,4 @@
 import { Logo } from './components/Logo';
-import './styles/theme.css';
-import './styles/global.css';
 import { Menu } from './components/Menu';
 import { CountDown } from './components/CountDown';
 import { Container } from './components/Container';
@@ -8,6 +6,10 @@ import { DefaultIndex } from './components/Input';
 import { Cyclos } from './components/Cyclos';
 import { DefaultButton } from './components/button';
 import { PlayCircleIcon } from 'lucide-react';
+import { Footer } from './components/Footer';
+
+import './styles/theme.css';
+import './styles/global.css';
 
 export function App() {
   return (
@@ -47,6 +49,10 @@ export function App() {
             <DefaultButton icon={<PlayCircleIcon />} />
           </div>
         </form>
+      </Container>
+
+      <Container>
+        <Footer />
       </Container>
     </div>
   );
