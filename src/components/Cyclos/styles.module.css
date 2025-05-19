@@ -1,9 +1,9 @@
-.cyclos {
+.cycles {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gao: 0.8rem;
+  gap: 1.6rem;
 }
 
 .cyclesDots {
