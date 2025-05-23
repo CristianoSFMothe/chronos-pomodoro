@@ -6,8 +6,9 @@ import type React from 'react';
 import { useRef } from 'react';
 import type { TaskModel } from '../../models/TasksModel';
 import { useTasksContext } from '../../contexts/TasksContext/userTaskContext';
-import { getNextCycle } from '../../ultils/getNextCycle';
-import { getNextCycleType } from '../../ultils/getNextCycleType';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
+import { formatSecondsToMinutes } from '../../utils/formateSecondsToMinutes';
 
 export function MainForm() {
   const { state, setState } = useTasksContext();
@@ -45,7 +46,7 @@ export function MainForm() {
         activeTask: newTask,
         currentCycle: nextCycle,
         secondsRemaining,
-        formattedSecondsRemaining: '0:00',
+        formattedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
         tasks: [...prevState.tasks, newTask],
       };
     });
