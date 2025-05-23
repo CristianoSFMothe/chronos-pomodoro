@@ -13,7 +13,10 @@ export const DefaultButton = ({
 }: DefaultButtonProps) => {
   return (
     <>
-      <button className={`${styles.button} ${styles[color]}`} {...props}>
+      <button
+        className={`${styles.button} ${styles[color]} button-task`}
+        {...props}
+      >
         {icon}
       </button>
     </>

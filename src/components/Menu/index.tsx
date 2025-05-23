@@ -41,7 +41,8 @@ export function Menu() {
   return (
     <nav className={styles.menu}>
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} buttonHome`}
+        data-testid='buttonHome'
         href='#'
         aria-label='Ir para a página inicial'
         title='Página Inicial'
@@ -50,7 +51,8 @@ export function Menu() {
       </a>
 
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} buttonHistory`}
+        data-testid='buttonHistory'
         href='#'
         aria-label='Ver Histórico'
         title='Ver Histórico'
@@ -59,7 +61,8 @@ export function Menu() {
       </a>
 
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} buttonSettings`}
+        data-testid='buttonSettings'
         href='#'
         aria-label='Configurações'
         title='Configurações'
@@ -68,7 +71,8 @@ export function Menu() {
       </a>
 
       <a
-        className={styles.menuLink}
+        className={`${styles.menuLink} buttonChangeTheme`}
+        data-testid='buttonChangeTheme'
         href='#'
         aria-label='Alterar Tema'
         title='Alterar Tema'
