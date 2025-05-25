@@ -10,7 +10,7 @@ export function Cyclos() {
 
   const cycleDescription = {
     workTime: 'Tempo de trabalho',
-    shortBeakTime: 'Intervalo curto',
+    shortBreakTime: 'Intervalo curto',
     longBreakTime: 'Intervalo longo',
   };
 
