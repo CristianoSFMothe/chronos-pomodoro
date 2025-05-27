@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TrashIcon } from 'lucide-react';
+import { DownloadIcon, TrashIcon } from 'lucide-react';
 import { Container } from '../../components/Container';
 import { Heading } from '../../components/Heading';
 import { MainTemplate } from '../../templates/MainTemplate';
@@ -13,6 +13,7 @@ import { showMessage } from '../../adapters/showMessage';
 import { formateDate } from '../../utils/formateDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
+import { exportHistoryToPDF } from '../../utils/exportTasksToPDF';
 
 export function HistoryPage() {
   const { state, dispatch } = useTasksContext();
@@ -99,6 +100,14 @@ export function HistoryPage() {
                 aria-label='Apagar todo histórico'
                 title='Apagar histórico'
                 onClick={handleResetHistory}
+              />
+              <DefaultButton
+                icon={<DownloadIcon />}
+                aria-label='Exportar histórico em PDF'
+                className='downloadHistoryPDF'
+                data-testid='downloadHistoryPDF'
+                title='Exportar histórico em PDF'
+                onClick={() => exportHistoryToPDF(state.tasks)}
               />
             </span>
           )}
