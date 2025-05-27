@@ -12,11 +12,35 @@ import { ConfirmModal } from '../../components/Modal';
 import { showMessage } from '../../adapters/showMessage';
 import { formateDate } from '../../utils/formateDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
+import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
 
 export function HistoryPage() {
   const { state, dispatch } = useTasksContext();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [taskIdToDelete, setTaskIdToDelete] = useState<string | null>(null);
+  const [sortTasksOptions, setSortTasksOptions] = useState<SortTasksOptions>(
+    () => {
+      return {
+        tasks: sortTasks({ tasks: state.tasks }),
+        field: 'startDate',
+        direction: 'desc',
+      };
+    },
+  );
+
+  const handleSortTasks = ({ field }: Pick<SortTasksOptions, 'field'>) => {
+    const newDirection = sortTasksOptions.direction === 'asc' ? 'desc' : 'asc';
+
+    setSortTasksOptions({
+      tasks: sortTasks({
+        direction: newDirection,
+        tasks: sortTasksOptions.tasks,
+        field,
+      }),
+      direction: newDirection,
+      field,
+    });
+  };
 
   const handleDeleteClick = (id: string) => {
     setTaskIdToDelete(id);
@@ -59,9 +83,24 @@ export function HistoryPage() {
           <table>
             <thead>
               <tr>
-                <th>Tarefa</th>
-                <th>Duração</th>
-                <th>Data</th>
+                <th
+                  className={styles.thSort}
+                  onClick={() => handleSortTasks({ field: 'name' })}
+                >
+                  Tarefa ↕
+                </th>
+                <th
+                  className={styles.thSort}
+                  onClick={() => handleSortTasks({ field: 'duration' })}
+                >
+                  Duração ↕
+                </th>
+                <th
+                  className={styles.thSort}
+                  onClick={() => handleSortTasks({ field: 'startDate' })}
+                >
+                  Data ↕
+                </th>
                 <th>Status</th>
                 <th>Tipo</th>
                 <th>Ações</th>
@@ -69,8 +108,7 @@ export function HistoryPage() {
             </thead>
 
             <tbody>
-              const taskTypeDictionary = {}
-              {state.tasks.map(task => {
+              {sortTasksOptions.tasks.map(task => {
                 const taskTypeDictionary = {
                   workTime: 'Foco',
                   shortBreakTime: 'Pausa Curta',
@@ -79,7 +117,7 @@ export function HistoryPage() {
                 return (
                   <tr key={task.id}>
                     <td>{task.name}</td>
-                    <td>{task.duration}</td>
+                    <td>{task.duration}min</td>
                     <td>{formateDate(task.startDate)}</td>
                     <td>{getTaskStatus(task, state.activeTask)}</td>
                     <td>{taskTypeDictionary[task.type]}</td>
