@@ -6,17 +6,23 @@ type DefaultIndexProps = {
   labelText: string;
 } & React.ComponentProps<'input'>;
 
-export const DefaultIndex = ({
+export const DefaultInput = ({
   id,
   labelText,
   type,
+  className,
   ...rest
 }: DefaultIndexProps) => {
   return (
     <>
       <label htmlFor={id}>{labelText}</label>
 
-      <input className={styles.input} id={id} type={type} {...rest} />
+      <input
+        className={`${styles.input} ${className ? `${className}` : ''}`}
+        id={id}
+        type={type}
+        {...rest}
+      />
     </>
   );
 };

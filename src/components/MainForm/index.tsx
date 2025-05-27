@@ -1,7 +1,7 @@
 import { PlayCircleIcon, StopCircleIcon } from 'lucide-react';
 import { DefaultButton } from '../button';
 import { Cyclos } from '../Cyclos';
-import { DefaultIndex } from '../Input';
+import { DefaultInput } from '../Input';
 import type React from 'react';
 import { useRef } from 'react';
 import type { TaskModel } from '../../models/TasksModel';
@@ -57,7 +57,7 @@ export function MainForm() {
   return (
     <form onSubmit={handleCreateNewTask} className='form' action=''>
       <div className='formRow'>
-        <DefaultIndex
+        <DefaultInput
           id='formInput'
           type='text'
           labelText='Tarefa'

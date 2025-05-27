@@ -64,7 +64,7 @@ export function Menu() {
       <RouterLink
         className={`${styles.menuLink} buttonSettings`}
         data-testid='buttonSettings'
-        href='#'
+        href='/settings'
         aria-label='Configurações'
         title='Configurações'
       >
