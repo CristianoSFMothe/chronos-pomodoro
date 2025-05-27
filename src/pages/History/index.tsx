@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DownloadIcon, TrashIcon } from 'lucide-react';
+import { DownloadIcon, FileTextIcon, TrashIcon } from 'lucide-react';
 import { Container } from '../../components/Container';
 import { Heading } from '../../components/Heading';
 import { MainTemplate } from '../../templates/MainTemplate';
@@ -14,6 +14,7 @@ import { formateDate } from '../../utils/formateDate';
 import { getTaskStatus } from '../../utils/getTaskStatus';
 import { sortTasks, type SortTasksOptions } from '../../utils/sortTasks';
 import { exportHistoryToPDF } from '../../utils/exportTasksToPDF';
+import { exportHistoryToCSV } from '../../utils/exportHistoryToCSV';
 
 export function HistoryPage() {
   const { state, dispatch } = useTasksContext();
@@ -108,6 +109,15 @@ export function HistoryPage() {
                 data-testid='downloadHistoryPDF'
                 title='Exportar histórico em PDF'
                 onClick={() => exportHistoryToPDF(state.tasks)}
+              />
+
+              <DefaultButton
+                icon={<FileTextIcon />}
+                aria-label='Exportar histórico em CSV'
+                title='Exportar histórico em CSV'
+                className='downloadHistoryCSV'
+                data-testid='downloadHistoryCSV'
+                onClick={() => exportHistoryToCSV(state.tasks)}
               />
             </span>
           )}
