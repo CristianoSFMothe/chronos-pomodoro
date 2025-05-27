@@ -10,6 +10,8 @@ import styles from './styles.module.css';
 import { TaskActionTypes } from '../../contexts/TasksContext/taskActions';
 import { ConfirmModal } from '../../components/Modal';
 import { showMessage } from '../../adapters/showMessage';
+import { formateDate } from '../../utils/formateDate';
+import { getTaskStatus } from '../../utils/getTaskStatus';
 
 export function HistoryPage() {
   const { state, dispatch } = useTasksContext();
@@ -67,26 +69,34 @@ export function HistoryPage() {
             </thead>
 
             <tbody>
-              {state.tasks.map(task => (
-                <tr key={task.id}>
-                  <td>{task.name}</td>
-                  <td>{task.duration}</td>
-                  <td>{new Date(task.startDate).toLocaleString()}</td>
-                  <td>{task.completedDate}</td>
-                  <td>{task.type}</td>
-                  <td>
-                    <div className={styles.buttonContainer}>
-                      <DefaultButton
-                        icon={<TrashIcon size={16} />}
-                        color='red'
-                        aria-label='Excluir tarefa'
-                        title='Excluir tarefa'
-                        onClick={() => handleDeleteClick(task.id)}
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              const taskTypeDictionary = {}
+              {state.tasks.map(task => {
+                const taskTypeDictionary = {
+                  workTime: 'Foco',
+                  shortBreakTime: 'Pausa Curta',
+                  longBreakTime: 'Pausa Longa',
+                };
+                return (
+                  <tr key={task.id}>
+                    <td>{task.name}</td>
+                    <td>{task.duration}</td>
+                    <td>{formateDate(task.startDate)}</td>
+                    <td>{getTaskStatus(task, state.activeTask)}</td>
+                    <td>{taskTypeDictionary[task.type]}</td>
+                    <td>
+                      <div className={styles.buttonContainer}>
+                        <DefaultButton
+                          icon={<TrashIcon size={16} />}
+                          color='red'
+                          aria-label='Excluir tarefa'
+                          title='Excluir tarefa'
+                          onClick={() => handleDeleteClick(task.id)}
+                        />
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
