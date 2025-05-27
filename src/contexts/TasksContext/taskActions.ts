@@ -1,12 +1,12 @@
 import type { TaskModel } from '../../models/TasksModel';
 
-// Objeto literal em vez de enum
 export const TaskActionTypes = {
   START_TASK: 'START_TASK',
   INTERRUPT_TASK: 'INTERRUPT_TASK',
   RESET_STATE: 'RESET_STATE',
   COUNT_DOWN: 'COUNT_DOWN',
   COMPLETE_TASK: 'COMPLETE_TASK',
+  REMOVE_TASK: 'REMOVE_TASK',
 } as const;
 
 export type TaskActionTypes =
@@ -20,6 +20,10 @@ export type TaskActionsWithPayload =
   | {
       type: typeof TaskActionTypes.COUNT_DOWN;
       payload: { secondsRemaining: number };
+    }
+  | {
+      type: typeof TaskActionTypes.REMOVE_TASK;
+      payload: { id: string };
     };
 
 export type TaskActionsWithoutPayload =

@@ -1,12 +1,38 @@
+import { useState } from 'react';
 import { TrashIcon } from 'lucide-react';
 import { Container } from '../../components/Container';
 import { Heading } from '../../components/Heading';
 import { MainTemplate } from '../../templates/MainTemplate';
 import { DefaultButton } from './../../components/button/index';
+import { useTasksContext } from '../../contexts/TasksContext/userTaskContext';
 
 import styles from './styles.module.css';
+import { TaskActionTypes } from '../../contexts/TasksContext/taskActions';
+import { ConfirmModal } from '../../components/Modal';
+import { showMessage } from '../../adapters/showMessage';
 
 export function HistoryPage() {
+  const { state, dispatch } = useTasksContext();
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [taskIdToDelete, setTaskIdToDelete] = useState<string | null>(null);
+
+  const handleDeleteClick = (id: string) => {
+    setTaskIdToDelete(id);
+    setShowConfirmModal(true);
+  };
+
+  const confirmDelete = () => {
+    if (taskIdToDelete) {
+      dispatch({
+        type: TaskActionTypes.REMOVE_TASK,
+        payload: { id: taskIdToDelete },
+      });
+      showMessage.success('Tarefa excluída com sucesso!');
+    }
+    setShowConfirmModal(false);
+    setTaskIdToDelete(null);
+  };
+
   return (
     <MainTemplate>
       <Container>
@@ -36,25 +62,42 @@ export function HistoryPage() {
                 <th>Data</th>
                 <th>Status</th>
                 <th>Tipo</th>
+                <th>Ações</th>
               </tr>
             </thead>
 
             <tbody>
-              {Array.from({ length: 20 }).map((_, index) => {
-                return (
-                  <tr key={index}>
-                    <td>Estudar</td>
-                    <td>25min</td>
-                    <td>27/05/2025 10:00</td>
-                    <td>Completa</td>
-                    <td>Foco</td>
-                  </tr>
-                );
-              })}
+              {state.tasks.map(task => (
+                <tr key={task.id}>
+                  <td>{task.name}</td>
+                  <td>{task.duration}</td>
+                  <td>{new Date(task.startDate).toLocaleString()}</td>
+                  <td>{task.completedDate}</td>
+                  <td>{task.type}</td>
+                  <td>
+                    <div className={styles.buttonContainer}>
+                      <DefaultButton
+                        icon={<TrashIcon size={16} />}
+                        color='red'
+                        aria-label='Excluir tarefa'
+                        title='Excluir tarefa'
+                        onClick={() => handleDeleteClick(task.id)}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       </Container>
+
+      <ConfirmModal
+        isOpen={showConfirmModal}
+        message='Tem certeza que deseja excluir esta tarefa?'
+        onCancel={() => setShowConfirmModal(false)}
+        onConfirm={confirmDelete}
+      />
     </MainTemplate>
   );
 }

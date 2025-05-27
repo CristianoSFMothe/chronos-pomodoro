@@ -56,6 +56,12 @@ export const taskReducer = (
         }),
       };
     }
+    case TaskActionTypes.REMOVE_TASK: {
+      return {
+        ...state,
+        tasks: state.tasks.filter(task => task.id !== action.payload.id),
+      };
+    }
     case TaskActionTypes.RESET_STATE: {
       return state;
     }
