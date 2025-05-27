@@ -9,12 +9,15 @@ type DefaultButtonProps = {
 export const DefaultButton = ({
   icon,
   color = 'green',
+  className,
   ...props
 }: DefaultButtonProps) => {
   return (
     <>
       <button
-        className={`${styles.button} ${styles[color]} button-task`}
+        className={`${styles.button} ${styles[color]}${
+          className ? ` ${className}` : ''
+        }`}
         {...props}
       >
         {icon}

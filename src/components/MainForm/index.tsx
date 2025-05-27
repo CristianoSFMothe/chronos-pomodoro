@@ -89,6 +89,7 @@ export function MainForm() {
             type='submit'
             id='startTaskButton'
             icon={<PlayCircleIcon />}
+            className='startTaskButton'
             data-testid='startTaskButton'
             key='submit'
           />
@@ -101,6 +102,7 @@ export function MainForm() {
             id='stopTaskButton'
             color='red'
             icon={<StopCircleIcon />}
+            className='stopTaskButton'
             data-testid='stopTaskButton'
             onClick={handleInterruptTask}
             key='button'

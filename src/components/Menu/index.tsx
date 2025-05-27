@@ -54,7 +54,7 @@ export function Menu() {
       <RouterLink
         className={`${styles.menuLink} buttonHistory`}
         data-testid='buttonHistory'
-        href='#'
+        href='/history'
         aria-label='Ver Histórico'
         title='Ver Histórico'
       >
