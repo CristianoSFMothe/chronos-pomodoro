@@ -54,7 +54,7 @@ export function Menu() {
       <RouterLink
         className={`${styles.menuLink} buttonHistory`}
         data-testid='buttonHistory'
-        href='/history'
+        href='/history/'
         aria-label='Ver Histórico'
         title='Ver Histórico'
       >
@@ -64,7 +64,7 @@ export function Menu() {
       <RouterLink
         className={`${styles.menuLink} buttonSettings`}
         data-testid='buttonSettings'
-        href='/settings'
+        href='/settings/'
         aria-label='Configurações'
         title='Configurações'
       >

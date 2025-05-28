@@ -21,9 +21,9 @@ export const MainRouter = () => {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/history' element={<HistoryPage />} />
-        <Route path='/about-pomodoro' element={<AboutPomodoroPage />} />
-        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/history/' element={<HistoryPage />} />
+        <Route path='/about-pomodoro/' element={<AboutPomodoroPage />} />
+        <Route path='/settings/' element={<SettingsPage />} />
 
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
