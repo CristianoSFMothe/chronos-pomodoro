@@ -1,37 +1,44 @@
 /// <reference types="cypress" />
-// ***********************************************
-// This example commands.ts shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-//
-// declare global {
-//   namespace Cypress {
-//     interface Chainable {
-//       login(email: string, password: string): Chainable<void>
-//       drag(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       dismiss(subject: string, options?: Partial<TypeOptions>): Chainable<Element>
-//       visit(originalFn: CommandOriginalFn, url: string, options: Partial<VisitOptions>): Chainable<Element>
-//     }
-//   }
-// }
+import { homeElements } from './elements/homeElements';
+import { toastElements } from './elements/components/toastElements';
+
+Cypress.Commands.add('openHomePage', (title, workTime) => {
+  cy.contains('span', title).should('be.visible');
+
+  cy.get(homeElements.workTime).should('have.text', workTime);
+});
+
+Cypress.Commands.add('createFocusedTask', () => {
+  cy.get(homeElements.inputTaskName)
+    .should('be.visible')
+    .click()
+    .type('Teste')
+    .should('have.value', 'Teste');
+
+  cy.get(homeElements.startTaskButton)
+    .should('be.visible')
+    .find('svg')
+    .should('have.class', homeElements.iconPlayer)
+    .as('playButton');
+
+  cy.get('@playButton').click();
+});
+
+Cypress.Commands.add('toastMessageSuccess', message => {
+  cy.get(toastElements.toastMessage)
+    .should('be.visible')
+    .and('have.text', message);
+});
+
+Cypress.Commands.add('validateInterruptedTaskButton', () => {
+  cy.get(homeElements.stopTaskButton)
+    .should('be.visible')
+    .find('svg')
+    .should('have.class', homeElements.iconStop);
+});
+
+Cypress.Commands.add('workTime', time => {
+  cy.get(homeElements.workTime).should($el => {
+    expect($el.text()).not.to.eq(time);
+  });
+});
