@@ -1,3 +1,6 @@
+import { homeElements } from '../support/elements/homeElements';
+import { toastElements } from '../support/elements/components/toastElements';
+
 describe('Tasks', () => {
   context('Initializing a task', () => {
     it('should successfully initialize a task', () => {
@@ -5,32 +8,32 @@ describe('Tasks', () => {
 
       cy.contains('span', 'Chronos').should('be.visible');
 
-      cy.get('[data-testid="workTime"]').should('have.text', '00:00');
+      cy.get(homeElements.workTime).should('have.text', '00:00');
 
-      cy.get('[data-testid="taskName"]')
+      cy.get(homeElements.inputTaskName)
         .should('be.visible')
         .click()
         .type('Teste')
         .should('have.value', 'Teste');
 
-      cy.get('[data-testid="startTaskButton"]')
+      cy.get(homeElements.startTaskButton)
         .should('be.visible')
         .find('svg')
-        .should('have.class', 'lucide-circle-play')
+        .should('have.class', homeElements.iconPlayer)
         .as('playButton');
 
       cy.get('@playButton').click();
 
-      cy.get('.Toastify__toast--success')
+      cy.get(toastElements.toastMessage)
         .should('be.visible')
         .and('have.text', 'Tarefa iniciada');
 
-      cy.get('[data-testid="stopTaskButton"]')
+      cy.get(homeElements.stopTaskButton)
         .should('be.visible')
         .find('svg')
-        .should('have.class', 'lucide-circle-stop');
+        .should('have.class', homeElements.iconStop);
 
-      cy.get('[data-testid="workTime"]').should($el => {
+      cy.get(homeElements.workTime).should($el => {
         expect($el.text()).not.to.eq('00:00');
       });
     });
