@@ -1,4 +1,5 @@
 import type { TaskModel } from '../../models/TasksModel';
+import type { TaskStateModel } from '../../models/TaskStateModel';
 
 export const TaskActionTypes = {
   START_TASK: 'START_TASK',
@@ -7,6 +8,7 @@ export const TaskActionTypes = {
   COUNT_DOWN: 'COUNT_DOWN',
   COMPLETE_TASK: 'COMPLETE_TASK',
   REMOVE_TASK: 'REMOVE_TASK',
+  CHANGE_SETTINGS: 'CHANGE_SETTINGS',
 } as const;
 
 export type TaskActionTypes =
@@ -24,6 +26,10 @@ export type TaskActionsWithPayload =
   | {
       type: typeof TaskActionTypes.REMOVE_TASK;
       payload: { id: string };
+    }
+  | {
+      type: typeof TaskActionTypes.CHANGE_SETTINGS;
+      payload: TaskStateModel['config'];
     };
 
 export type TaskActionsWithoutPayload =
