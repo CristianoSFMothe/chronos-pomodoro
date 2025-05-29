@@ -9,8 +9,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy": "gh-pages -d dist",
-    "test": "cypress run",
-    "cy:open": "cypress open",
+    "test": "start-server-and-test dev http://localhost:5173 cypress run",
+    "test:cloud": "start-server-and-test dev http://localhost:5173 cypress run",
     "lint:cy": "eslint cypress/**/*.js && eslint cypress.config.js",
     "lint:fix": "eslint cypress/**/*.js --fix && eslint cypress.config.js --fix"
   },
