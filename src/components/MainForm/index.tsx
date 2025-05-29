@@ -71,7 +71,7 @@ export function MainForm() {
         />
       </div>
 
-      <div className='formRow'>
+      <div className='formRow tipsWorks'>
         <Tips />
       </div>
 

@@ -5,4 +5,5 @@ export const homeElements = {
   stopTaskButton: '[data-testid="stopTaskButton"]',
   iconPlayer: 'lucide-circle-play',
   iconStop: 'lucide-circle-stop',
+  tipsWorks: '.tipsWorks',
 };
