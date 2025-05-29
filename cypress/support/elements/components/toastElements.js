@@ -1,3 +1,4 @@
 export const toastElements = {
-  toastMessage: '.Toastify__toast--success',
+  toastMessageSuccess: '.Toastify__toast--success',
+  toastMessageWarning: '.Toastify__toast--warning',
 };

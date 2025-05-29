@@ -20,10 +20,10 @@ describe('Tasks', () => {
 
       cy.ToastMessageSuccess('Tarefa iniciada');
 
-      cy.validateInterruptedTaskButton();
+      cy.ValidateInterruptedTaskButton();
     });
 
-    it('should initialize a task', () => {
+    it('should initialize a task and interrupt', () => {
       cy.clock();
 
       cy.OpenHomePage('Chronos', '00:00');
@@ -78,6 +78,12 @@ describe('Tasks', () => {
 
         cy.interruptTask();
       }
+    });
+  });
+
+  context('attempt to create task', () => {
+    it('should not create task with empty name field', () => {
+      cy.EmptyFieldTaskName('Digite o nome da tarefa');
     });
   });
 });
